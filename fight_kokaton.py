@@ -191,19 +191,15 @@ def main():
                 return
         
         
-        for j, bomb in enumerate(bombs):
-            for i, beam in enumerate(beams):
-                if bomb is not None:
-                    if beam is not None:
-                        if beam.rct.colliderect(bomb.rct): #  ビームと爆弾の衝突判定
-                            beams[i] = None #  ビームを消す
-                            bombs[j] = None #  爆弾を消す
-                            bird.change_img(6, screen)
-                            score.score += 1
-                            
-                            
-            beams = [beam for beam in beams if beam is not None]
-        bombs = [bomb for bomb in bombs if bomb is not None]
+        for i, beam in enumerate(beams):
+            for j, bomb in enumerate(bombs):
+                if beam.rct.colliderect(bomb.rct): #  ビームと爆弾の衝突判定
+                    beams[i] = None #  ビームを消す
+                    bombs[j] = None #  爆弾を消す
+                    bird.change_img(6, screen)
+                    score.score += 1            
+            bombs = [bomb for bomb in bombs if bomb is not None]
+        beams = [beam for beam in beams if beam is not None]
 
 
         key_lst = pg.key.get_pressed()
